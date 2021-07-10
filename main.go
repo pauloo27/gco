@@ -2,8 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
 
 	"github.com/Pauloo27/gommit/mode"
 )
@@ -25,7 +23,5 @@ func main() {
 		mode.Init()
 		return
 	}
-	// TODO
-	fmt.Println("not implemented yet")
-	os.Exit(-1)
+	mode.Commit()
 }
