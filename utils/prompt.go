@@ -2,9 +2,8 @@ package utils
 
 import "github.com/c-bata/go-prompt"
 
-func Prompt(prefix string, completer prompt.Completer) string {
-	return prompt.Input(
-		prefix, completer,
+func Prompt(prefix string, completer prompt.Completer, options ...prompt.Option) string {
+	opts := []prompt.Option{
 		prompt.OptionDescriptionTextColor(prompt.White),
 		prompt.OptionDescriptionBGColor(prompt.Black),
 
@@ -18,6 +17,11 @@ func Prompt(prefix string, completer prompt.Completer) string {
 		prompt.OptionSelectedDescriptionBGColor(prompt.LightGray),
 
 		prompt.OptionShowCompletionAtStart(),
+	}
+	opts = append(opts, options...)
+	return prompt.Input(
+		prefix, completer,
+		opts...,
 	)
 }
 
