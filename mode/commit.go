@@ -12,14 +12,14 @@ import (
 )
 
 func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
+	s := []prompt.Suggest{}
+	for _, prefix := range prefixPack.Prefixes {
+		s = append(s, prompt.Suggest{
+			Text:        prefix.Value,
+			Description: prefix.Name,
+		})
+	}
 	return func(d prompt.Document) []prompt.Suggest {
-		s := []prompt.Suggest{}
-		for _, prefix := range prefixPack.Prefixes {
-			s = append(s, prompt.Suggest{
-				Text:        prefix.Value,
-				Description: prefix.Name,
-			})
-		}
 		return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 	}
 }
