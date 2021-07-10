@@ -6,26 +6,12 @@ import (
 )
 
 var defaultConfig = &Config{
-	RemoveTrailingPeriods: true,
-	PrefixPack:            "text",
+	PrefixPack: "text",
 }
+
 var globalConfig *Config
 var projectConfig *Config
 var projectConfigNotFound bool
-
-func GetGlobalConfig() (*Config, error) {
-	if globalConfig == nil {
-		userHome, err := os.UserHomeDir()
-		if err != nil {
-			return nil, err
-		}
-		globalConfig, err = LoadConfig(fmt.Sprintf("%s/.config/gommit.json", userHome))
-		if err != nil {
-			return nil, err
-		}
-	}
-	return globalConfig, nil
-}
 
 func GetProjectConfig() (*Config, error) {
 	if projectConfig == nil && !projectConfigNotFound {
@@ -40,12 +26,4 @@ func GetProjectConfig() (*Config, error) {
 		}
 	}
 	return projectConfig, nil
-}
-
-func GetAnyConfig() (*Config, error) {
-	projectConfig, err := GetProjectConfig()
-	if !projectConfigNotFound {
-		return projectConfig, err
-	}
-	return GetGlobalConfig()
 }
