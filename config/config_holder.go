@@ -15,10 +15,12 @@ var projectConfigNotFound bool
 func GetProjectConfig() (*Config, error) {
 	if projectConfig == nil && !projectConfigNotFound {
 		var err error
-		projectConfig, err = LoadConfig("./.gommit.json")
+		// TODO: use git root
+		projectConfig, err = LoadConfig("./.gommitrc.json")
 		if err != nil {
 			if os.IsNotExist(err) {
 				projectConfigNotFound = true
+				return nil, err
 			} else {
 				return nil, err
 			}
