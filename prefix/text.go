@@ -2,6 +2,7 @@ package prefix
 
 var TextPrefix = PrefixPack{
 	Name:        "Text",
+	Separator:   ":",
 	Description: "Text prefixes",
 	Prefixes: map[string]*Prefix{
 		"feat": {
@@ -59,6 +60,10 @@ var TextPrefix = PrefixPack{
 		"ux": {
 			Name:  "improve ux/accessibility",
 			Value: "ux",
+		},
+		"improve": {
+			Name:  "improve code",
+			Value: "improve",
 		},
 		"refact": {
 			Name:  "refactor",

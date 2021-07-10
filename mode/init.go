@@ -3,14 +3,19 @@ package mode
 import (
 	"fmt"
 
+	"github.com/Pauloo27/gommit/prefix"
 	"github.com/c-bata/go-prompt"
 )
 
 func initCompleter(d prompt.Document) []prompt.Suggest {
-	s := []prompt.Suggest{
-		{Text: "text", Description: "feat: fix: ci:"},
-		{Text: "emojis-name", Description: ":sparkles: :bug: :construction_worker:"},
-		{Text: "emojis-unicode", Description: "✨ 🐛 👷"},
+	s := []prompt.Suggest{}
+	for _, prefixPack := range prefix.Packs {
+		s = append(s, prompt.Suggest{
+			Text: prefixPack.Name,
+			Description: fmt.Sprintf("%s %s %s",
+				prefixPack.GetPrefix("feat"), prefixPack.GetPrefix("fix"), prefixPack.GetPrefix("ci"),
+			),
+		})
 	}
 	return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
