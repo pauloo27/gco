@@ -5,7 +5,6 @@ type Prefix struct {
 }
 
 type Config struct {
-	RemoveTrailingPeriods bool
-	PrefixPack            string
-	Prefixes              []Prefix
+	PrefixPack string
+	Prefixes   []Prefix
 }
