@@ -2,6 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"os"
+
+	"github.com/Pauloo27/gommit/mode"
 )
 
 var isHelp, isInit bool
@@ -18,8 +22,10 @@ func main() {
 		return
 	}
 	if isInit {
-		// TODO: init
+		mode.Init()
 		return
 	}
 	// TODO
+	fmt.Println("not implemented yet")
+	os.Exit(-1)
 }
