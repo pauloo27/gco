@@ -1,7 +1,7 @@
 package prefix
 
 var TextPrefix = PrefixPack{
-	Name:        "Text",
+	Name:        "text",
 	Separator:   ":",
 	Description: "Text prefixes",
 	Prefixes: map[string]*Prefix{
