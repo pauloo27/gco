@@ -1,5 +1,7 @@
 package prefix
 
+import "strings"
+
 type Prefix struct {
 	Name, Value string
 }
@@ -16,4 +18,13 @@ func (p *PrefixPack) GetPrefix(name string) string {
 
 var Packs = []PrefixPack{
 	TextPrefix,
+}
+
+func GetPrefixPack(name string) *PrefixPack {
+	for _, prefixPack := range Packs {
+		if strings.EqualFold(prefixPack.Name, name) {
+			return &prefixPack
+		}
+	}
+	return nil
 }
