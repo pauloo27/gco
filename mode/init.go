@@ -2,7 +2,9 @@ package mode
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/Pauloo27/gommit/config"
 	"github.com/Pauloo27/gommit/prefix"
 	"github.com/c-bata/go-prompt"
 )
@@ -37,5 +39,19 @@ func Init() {
 
 		prompt.OptionShowCompletionAtStart(),
 	)
-	fmt.Println(name)
+
+	pack := prefix.GetPrefixPack(name)
+	if pack == nil {
+		fmt.Println("Prefix pack not found =(")
+		os.Exit(-1)
+	}
+	// TODO: store config
+	c := config.Config{
+		PrefixPack: pack.Name,
+	}
+	err := config.StoreConfig(&c, "./.gommitrc.json")
+	if err != nil {
+		fmt.Println("Something went wrong while storing the config", err)
+		os.Exit(-1)
+	}
 }
