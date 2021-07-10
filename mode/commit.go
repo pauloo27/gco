@@ -3,6 +3,7 @@ package mode
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Pauloo27/gommit/config"
 	"github.com/Pauloo27/gommit/prefix"
@@ -38,13 +39,31 @@ func Commit() {
 	}
 	// TODO: prompt files to add
 
-	prefix := utils.Prompt(" λ ", commitCompleter(pack), prompt.OptionPrefixTextColor(prompt.Blue))
-	prefix = pack.GetPrefix(prefix)
+	promptPrefix := " λ "
 
-	// TODO: prompt title
+	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
+
+	rawPrefix := utils.Prompt(promptPrefix, commitCompleter(pack), prompt.OptionPrefixTextColor(prompt.Blue))
+	prefix := pack.GetPrefix(rawPrefix)
+	if prefix == "" {
+		prefix = rawPrefix
+	}
+
 	utils.MoveCursorUp(1)
 	utils.ClearLine()
-	title := utils.Prompt(" λ "+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
-	fmt.Println(prefix + title)
-	// TODO: prompt message
+	title := utils.Prompt(promptPrefix+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
+	message := ""
+	fmt.Println(" == Write the commit body, line by line")
+	fmt.Println(" == Enter a line with spaces to add a empty line")
+	fmt.Println(" == Enter a empty line when you are done")
+	for {
+		line := prompt.Input("-> ", utils.EmptyCompleter)
+		if line == "" {
+			break
+		}
+		if strings.TrimSpace(line) == "" {
+		}
+		message += line
+	}
+	fmt.Println(title, message)
 }

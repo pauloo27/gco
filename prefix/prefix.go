@@ -13,7 +13,11 @@ type PrefixPack struct {
 }
 
 func (p *PrefixPack) GetPrefix(name string) string {
-	return p.Prefixes[name].Value + p.Separator
+	prefix, found := p.Prefixes[strings.ToLower(name)]
+	if !found {
+		return ""
+	}
+	return prefix.Value + p.Separator
 }
 
 var Packs = []PrefixPack{
