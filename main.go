@@ -1,7 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"flag"
+)
+
+var isHelp, isInit bool
+
+func init() {
+	flag.BoolVar(&isHelp, "help", false, "show command help")
+	flag.BoolVar(&isInit, "init", false, "create a project config")
+}
 
 func main() {
-	fmt.Println("Hello World")
+	flag.Parse()
+	if isHelp {
+		flag.Usage()
+		return
+	}
+	if isInit {
+		// TODO: init
+		return
+	}
+	// TODO
 }
