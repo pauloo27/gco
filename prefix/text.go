@@ -26,6 +26,14 @@ var TextPrefix = PrefixPack{
 			Name:        "doc",
 		},
 		{
+			Description: "initial commit",
+			Name:        "init",
+		},
+		{
+			Description: "delete code",
+			Name:        "delete",
+		},
+		{
 			Description: "move or rename code/files",
 			Name:        "move",
 		},
