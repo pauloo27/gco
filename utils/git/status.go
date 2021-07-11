@@ -19,13 +19,13 @@ type ChangedFile struct {
 func parseChangedFile(statusLine string) *ChangedFile {
 	parts := strings.Split(strings.TrimSpace(statusLine), " ")
 
-	// TL;DR: one "extra column" is outputed when the file is tracked
-	// the output (with leading/trailing spaces trimed) looks like this:
-	// (conside _ as white space)
-	// - _M name -> when file is modified, but not added
-	// - M_ name -> when file is modified and added
-	// - MM name -> when file is modified and added, but the file was modified...
-	// after the add. So, a extra column is output when the file is tracked
+	// TL;DR: one "extra column" is outputted when the file is tracked
+	// The output (with leading/trailing spaces trimmed) looks like this:
+	// (consider _ also as white space)
+	//   M name -> when file is modified, but not added
+	//   M_ name -> when file is modified and added
+	//   MM name -> when file is modified and added, but the file was modified...
+	// after the add. So, a extra column is outputted when the file is tracked
 
 	tracked := len(parts) == 3
 	var name string
