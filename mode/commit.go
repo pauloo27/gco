@@ -33,6 +33,8 @@ func Commit() {
 			fmt.Println("Gommit config not found. Create one with gommit --init")
 			os.Exit(-1)
 		}
+		fmt.Println(err)
+		os.Exit(-1)
 	}
 	pack := prefix.GetPrefixPack(c.PrefixPack)
 	if pack == nil {
