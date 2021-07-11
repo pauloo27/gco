@@ -74,6 +74,10 @@ var TextPrefix = PrefixPack{
 			Name:        "i18n",
 		},
 		{
+			Description: "add/remove development related stuff",
+			Name:        "dev",
+		},
+		{
 			Description: "work in progress",
 			Name:        "wip",
 		},
