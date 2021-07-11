@@ -2,7 +2,7 @@
 
 Write God-tier commits.
 
-![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/d070e7d-9378-4ff6-b1fc-3b1571941a61)
+![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/7d070e7d-9378-4ff6-b1fc-3b1571941a61)
 
 ## License
 
