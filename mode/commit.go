@@ -3,6 +3,7 @@ package mode
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/Pauloo27/gommit/config"
@@ -39,7 +40,7 @@ func Commit() {
 	}
 	// TODO: prompt files to add
 
-	promptPrefix := " λ "
+	promptPrefix := " -> "
 
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
 
@@ -52,12 +53,17 @@ func Commit() {
 	utils.MoveCursorUp(1)
 	utils.ClearLine()
 	title := utils.Prompt(promptPrefix+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
+	if title == "" {
+		fmt.Println("Commit cancelled")
+		os.Exit(-1)
+	}
 	message := ""
 	fmt.Println(" == Write the commit body, line by line")
 	fmt.Println(" == Enter a line with spaces to add a empty line")
 	fmt.Println(" == Enter a empty line when you are done")
+	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 82))
 	for {
-		line := prompt.Input("-> ", utils.EmptyCompleter)
+		line := prompt.Input(promptPrefix, utils.EmptyCompleter)
 		if line == "" {
 			break
 		}
@@ -65,5 +71,13 @@ func Commit() {
 		}
 		message += line
 	}
-	fmt.Println(title, message)
+	commit := title + "\n\n" + message
+	cmd := exec.Command("git", "commit", "-m", commit)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		os.Exit(-1)
+	}
+	fmt.Println("nice")
 }
