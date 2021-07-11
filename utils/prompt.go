@@ -1,6 +1,11 @@
 package utils
 
-import "github.com/c-bata/go-prompt"
+import (
+	"fmt"
+	"os"
+
+	"github.com/c-bata/go-prompt"
+)
 
 func Prompt(prefix string, completer prompt.Completer, options ...prompt.Option) string {
 	opts := []prompt.Option{
@@ -15,6 +20,14 @@ func Prompt(prefix string, completer prompt.Completer, options ...prompt.Option)
 
 		prompt.OptionSelectedDescriptionTextColor(prompt.Black),
 		prompt.OptionSelectedDescriptionBGColor(prompt.LightGray),
+
+		prompt.OptionAddKeyBind(prompt.KeyBind{
+			Key: prompt.ControlC,
+			Fn: func(b *prompt.Buffer) {
+				fmt.Println("Ctrl C was pressed. Exiting...")
+				os.Exit(-1)
+			},
+		}),
 
 		prompt.OptionShowCompletionAtStart(),
 	}
