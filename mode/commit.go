@@ -3,6 +3,7 @@ package mode
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/Pauloo27/gommit/config"
@@ -25,6 +26,29 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 	}
 }
 
+func prettyPrint(out prompt.ConsoleWriter, components ...interface{}) {
+	for _, component := range components {
+		switch component.(type) {
+		case string:
+			out.WriteStr(component.(string))
+		case int:
+			out.WriteStr(strconv.Itoa(component.(int)))
+		case prompt.Color:
+			c := component.(prompt.Color)
+			bold := true
+			if c == prompt.DefaultColor {
+				bold = false
+			}
+			out.SetColor(component.(prompt.Color), prompt.DefaultColor, bold)
+		}
+	}
+	err := out.Flush()
+	if err != nil {
+		fmt.Println("Something went wrong while writting to output console")
+		os.Exit(-1)
+	}
+}
+
 func Commit() {
 	c, err := config.GetProjectConfig()
 	if err != nil {
@@ -40,23 +64,34 @@ func Commit() {
 	}
 	// TODO: prompt files to add
 
+	out := prompt.NewStderrWriter()
 	promptPrefix := " -> "
 
 	branch, err := git.GetCurrentBranchName()
-	fmt.Printf("You are commiting to branch %s\n", branch)
+	prettyPrint(out,
+		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
+	)
+
 	fmt.Println("Enter a empty line to cancel the commit")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
 
 	rawPrefix := utils.Prompt(promptPrefix, commitCompleter(pack), prompt.OptionPrefixTextColor(prompt.Blue))
+	if rawPrefix == "" {
+		fmt.Println("Commit cancelled")
+		os.Exit(-1)
+	}
 	prefix := pack.GetPrefix(rawPrefix)
 	if prefix == "" {
 		prefix = rawPrefix
 	}
 
-	out := prompt.NewStderrWriter()
 	out.CursorUp(1)
 	out.EraseLine()
-	out.Flush()
+	err = out.Flush()
+	if err != nil {
+		fmt.Println("Something went wrong while writting to output console")
+		os.Exit(-1)
+	}
 
 	title := utils.Prompt(promptPrefix+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
 	if title == "" {
@@ -66,7 +101,8 @@ func Commit() {
 	message := ""
 	fmt.Println(" == Write the commit body, line by line")
 	fmt.Println(" == Enter a line with spaces to add a empty line")
-	fmt.Println(" == Enter a empty line when you are done")
+	fmt.Println(" == Enter an empty line when you are done")
+	fmt.Println(" == Enter . to cancel")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 82))
 	for {
 		line := prompt.Input(promptPrefix, utils.EmptyCompleter)
