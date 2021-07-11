@@ -35,7 +35,7 @@ func Init() {
 	c := config.Config{
 		PrefixPack: pack.Name,
 	}
-	err := config.StoreConfig(&c, "./.gommitrc.json")
+	err := config.StoreProjectConfig(&c)
 	if err != nil {
 		fmt.Println("Something went wrong while storing the config", err)
 		os.Exit(-1)
