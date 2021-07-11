@@ -3,7 +3,7 @@ package prefix
 import "strings"
 
 type Prefix struct {
-	Name, Value string
+	Description, Name string
 }
 
 type PrefixPack struct {
@@ -14,8 +14,8 @@ type PrefixPack struct {
 
 func (p *PrefixPack) GetPrefix(name string) string {
 	for _, prefix := range p.Prefixes {
-		if strings.EqualFold(prefix.Value, name) {
-			return prefix.Value + p.Separator
+		if strings.EqualFold(prefix.Name, name) {
+			return prefix.Name + p.Separator
 		}
 	}
 	return ""

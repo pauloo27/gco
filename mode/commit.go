@@ -16,8 +16,8 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 	s := []prompt.Suggest{}
 	for _, prefix := range prefixPack.Prefixes {
 		s = append(s, prompt.Suggest{
-			Text:        prefix.Value,
-			Description: prefix.Name,
+			Text:        prefix.Name,
+			Description: prefix.Description,
 		})
 	}
 	return func(d prompt.Document) []prompt.Suggest {
