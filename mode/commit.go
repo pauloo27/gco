@@ -3,7 +3,6 @@ package mode
 import (
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/Pauloo27/gommit/config"
@@ -26,29 +25,6 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 	}
 }
 
-func prettyPrint(out prompt.ConsoleWriter, components ...interface{}) {
-	for _, component := range components {
-		switch component.(type) {
-		case string:
-			out.WriteStr(component.(string))
-		case int:
-			out.WriteStr(strconv.Itoa(component.(int)))
-		case prompt.Color:
-			c := component.(prompt.Color)
-			bold := true
-			if c == prompt.DefaultColor {
-				bold = false
-			}
-			out.SetColor(component.(prompt.Color), prompt.DefaultColor, bold)
-		}
-	}
-	err := out.Flush()
-	if err != nil {
-		fmt.Println("Something went wrong while writting to output console")
-		os.Exit(-1)
-	}
-}
-
 func Commit() {
 	c, err := config.GetProjectConfig()
 	if err != nil {
@@ -68,7 +44,7 @@ func Commit() {
 	promptPrefix := " -> "
 
 	branch, err := git.GetCurrentBranchName()
-	prettyPrint(out,
+	utils.PrettyPrint(out,
 		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
 	)
 
@@ -99,19 +75,35 @@ func Commit() {
 		os.Exit(-1)
 	}
 	message := ""
-	fmt.Println(" == Write the commit body, line by line")
-	fmt.Println(" == Enter a line with spaces to add a empty line")
-	fmt.Println(" == Enter an empty line when you are done")
-	fmt.Println(" == Enter . to cancel")
+
+	utils.PrettyPrint(out, " == Write the commit body, line by line\n")
+	utils.PrettyPrint(out,
+		" == Enter a line ", prompt.Blue, "with spaces ", prompt.DefaultColor,
+		"to add a ", prompt.Blue, "empty line", prompt.DefaultColor, "\n",
+	)
+	utils.PrettyPrint(out,
+		" == Enter an ", prompt.Blue, "empty line ", prompt.DefaultColor,
+		"when you are done\n",
+	)
+	utils.PrettyPrint(out,
+		" == Enter a ", prompt.Blue, ". ", prompt.DefaultColor,
+		"to ", prompt.Blue, "cancel commit", prompt.DefaultColor, "\n",
+	)
+
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 82))
 	for {
 		line := prompt.Input(promptPrefix, utils.EmptyCompleter)
+		if line == "." {
+			fmt.Println("Commit cancelled")
+			os.Exit(-1)
+		}
 		if line == "" {
 			break
 		}
-		if strings.TrimSpace(line) == "" {
+		if strings.TrimSpace(line) != "" {
+			message += line
 		}
-		message += line
+		message += "\n"
 	}
 	err = git.CommitToStdout(prefix, title, message)
 	if err != nil {
