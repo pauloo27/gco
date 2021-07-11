@@ -14,12 +14,14 @@ var globalConfig *Config
 var projectConfig *Config
 var projectConfigNotFound bool
 
+var rcFileName = ".gommitrc.json"
+
 func StoreProjectConfig(conf *Config) error {
 	gitRoot, err := utils.GetRepositoryRoot()
 	if err != nil {
 		return err
 	}
-	return StoreConfig(conf, gitRoot+"/.gotmmitrc.json")
+	return StoreConfig(conf, gitRoot+"/"+rcFileName)
 }
 
 func GetProjectConfig() (*Config, error) {
@@ -29,7 +31,7 @@ func GetProjectConfig() (*Config, error) {
 		if err != nil {
 			return nil, err
 		}
-		projectConfig, err = LoadConfig(gitRoot + "/.gommitrc.json")
+		projectConfig, err = LoadConfig(gitRoot + "/" + rcFileName)
 		if err != nil {
 			if os.IsNotExist(err) {
 				projectConfigNotFound = true
