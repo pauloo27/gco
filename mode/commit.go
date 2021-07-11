@@ -3,7 +3,6 @@ package mode
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/Pauloo27/gommit/config"
@@ -75,16 +74,8 @@ func Commit() {
 		}
 		message += line
 	}
-
-	commit := prefix + title + "\n\n" + message
-	cmd := exec.Command("git", "commit", "-m", commit)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err = cmd.Run()
-
+	err = git.CommitToStdout(prefix, title, message)
 	if err != nil {
 		os.Exit(-1)
 	}
-
-	fmt.Println("nice")
 }
