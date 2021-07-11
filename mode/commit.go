@@ -53,8 +53,11 @@ func Commit() {
 		prefix = rawPrefix
 	}
 
-	utils.MoveCursorUp(1)
-	utils.ClearLine()
+	out := prompt.NewStderrWriter()
+	out.CursorUp(1)
+	out.EraseLine()
+	out.Flush()
+
 	title := utils.Prompt(promptPrefix+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
 	if title == "" {
 		fmt.Println("Commit cancelled")
