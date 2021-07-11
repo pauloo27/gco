@@ -9,6 +9,7 @@ import (
 	"github.com/Pauloo27/gommit/config"
 	"github.com/Pauloo27/gommit/prefix"
 	"github.com/Pauloo27/gommit/utils"
+	"github.com/Pauloo27/gommit/utils/git"
 	"github.com/c-bata/go-prompt"
 )
 
@@ -42,7 +43,7 @@ func Commit() {
 
 	promptPrefix := " -> "
 
-	branch, err := utils.GetCurrentBranchName()
+	branch, err := git.GetCurrentBranchName()
 	fmt.Printf("You are commiting to branch %s\n", branch)
 	fmt.Println("Enter a empty line to cancel the commit")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))

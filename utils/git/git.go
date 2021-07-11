@@ -1,4 +1,4 @@
-package utils
+package git
 
 import (
 	"os/exec"
@@ -16,8 +16,4 @@ func RunGitCommand(params ...string) (string, error) {
 
 func GetRepositoryRoot() (string, error) {
 	return RunGitCommand("rev-parse", "--show-toplevel")
-}
-
-func GetCurrentBranchName() (string, error) {
-	return RunGitCommand("rev-parse", "--abbrev-ref", "HEAD")
 }
