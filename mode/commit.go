@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/Pauloo27/gommit/config"
 	"github.com/Pauloo27/gommit/prefix"
@@ -41,7 +42,8 @@ func Commit() {
 	// TODO: prompt files to add
 
 	out := prompt.NewStderrWriter()
-	promptPrefix := " -> "
+	promptPrefix := " λ "
+	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
 
 	branch, err := git.GetCurrentBranchName()
 	utils.PrettyPrint(out,
@@ -49,7 +51,7 @@ func Commit() {
 	)
 
 	fmt.Println("Enter a empty line to cancel the commit")
-	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
+	fmt.Printf("%s%s\n", strings.Repeat(" ", promptPrefixLen), strings.Repeat("-", 49))
 
 	rawPrefix := utils.Prompt(promptPrefix, commitCompleter(pack), prompt.OptionPrefixTextColor(prompt.Blue))
 	if rawPrefix == "" {
@@ -90,7 +92,7 @@ func Commit() {
 		"to ", prompt.Blue, "cancel commit", prompt.DefaultColor, "\n",
 	)
 
-	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 82))
+	fmt.Printf("%s%s\n", strings.Repeat(" ", promptPrefixLen), strings.Repeat("-", 82))
 	for {
 		line := prompt.Input(promptPrefix, utils.EmptyCompleter)
 		if line == "." {
