@@ -71,7 +71,7 @@ func Commit() {
 		}
 		message += line
 	}
-	commit := title + "\n\n" + message
+	commit := prefix + title + "\n\n" + message
 	cmd := exec.Command("git", "commit", "-m", commit)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
