@@ -42,15 +42,7 @@ var TextPrefix = PrefixPack{
 			Name:        "test",
 		},
 		{
-			Description: "upgrade dependency",
-			Name:        "up",
-		},
-		{
-			Description: "downgrade dependency",
-			Name:        "dep",
-		},
-		{
-			Description: "add/remove dependency",
+			Description: "add/remove/update dependency",
 			Name:        "dep",
 		},
 		{
