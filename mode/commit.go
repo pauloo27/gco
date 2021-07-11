@@ -42,6 +42,8 @@ func Commit() {
 
 	promptPrefix := " -> "
 
+	branch, err := utils.GetCurrentBranchName()
+	fmt.Printf("You are commiting to branch %s\n", branch)
 	fmt.Println("Enter a empty line to cancel the commit")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
 
