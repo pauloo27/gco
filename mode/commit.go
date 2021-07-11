@@ -42,6 +42,7 @@ func Commit() {
 
 	promptPrefix := " -> "
 
+	fmt.Println("Enter a empty line to cancel the commit")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", len(promptPrefix)), strings.Repeat("-", 49))
 
 	rawPrefix := utils.Prompt(promptPrefix, commitCompleter(pack), prompt.OptionPrefixTextColor(prompt.Blue))

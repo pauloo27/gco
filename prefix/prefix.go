@@ -9,15 +9,16 @@ type Prefix struct {
 type PrefixPack struct {
 	Name, Description string
 	Separator         string
-	Prefixes          map[string]*Prefix
+	Prefixes          []*Prefix
 }
 
 func (p *PrefixPack) GetPrefix(name string) string {
-	prefix, found := p.Prefixes[strings.ToLower(name)]
-	if !found {
-		return ""
+	for _, prefix := range p.Prefixes {
+		if strings.EqualFold(prefix.Value, name) {
+			return prefix.Value + p.Separator
+		}
 	}
-	return prefix.Value + p.Separator
+	return ""
 }
 
 var Packs = []PrefixPack{
