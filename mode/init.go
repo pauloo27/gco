@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Pauloo27/gommit/config"
-	"github.com/Pauloo27/gommit/prefix"
-	"github.com/Pauloo27/gommit/utils"
+	"github.com/Pauloo27/gco/config"
+	"github.com/Pauloo27/gco/prefix"
+	"github.com/Pauloo27/gco/utils"
 	"github.com/c-bata/go-prompt"
 )
 

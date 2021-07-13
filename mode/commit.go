@@ -6,10 +6,10 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/Pauloo27/gommit/config"
-	"github.com/Pauloo27/gommit/prefix"
-	"github.com/Pauloo27/gommit/utils"
-	"github.com/Pauloo27/gommit/utils/git"
+	"github.com/Pauloo27/gco/config"
+	"github.com/Pauloo27/gco/prefix"
+	"github.com/Pauloo27/gco/utils"
+	"github.com/Pauloo27/gco/utils/git"
 	"github.com/c-bata/go-prompt"
 )
 
@@ -30,7 +30,7 @@ func Commit() {
 	c, err := config.GetProjectConfig()
 	if err != nil {
 		if os.IsNotExist(err) {
-			fmt.Println("Gommit config not found. Create one with gommit --init")
+			fmt.Println("Gommit config not found. Create one with gco --init")
 			os.Exit(-1)
 		}
 		fmt.Println(err)

@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/Pauloo27/gommit/mode"
+	"github.com/Pauloo27/gco/mode"
 )
 
 var isHelp, isInit bool

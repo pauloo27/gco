@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	"github.com/Pauloo27/gommit/utils/git"
+	"github.com/Pauloo27/gco/utils/git"
 )
 
 var defaultConfig = &Config{
@@ -14,7 +14,7 @@ var globalConfig *Config
 var projectConfig *Config
 var projectConfigNotFound bool
 
-var rcFileName = ".gommitrc.json"
+var rcFileName = ".gcorc.json"
 
 func StoreProjectConfig(conf *Config) error {
 	gitRoot, err := git.GetRepositoryRoot()

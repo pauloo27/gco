@@ -1,4 +1,4 @@
-module github.com/Pauloo27/gommit
+module github.com/Pauloo27/gco
 
 go 1.16
 
