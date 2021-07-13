@@ -2,7 +2,7 @@
 
 Write God-tier commits.
 
-![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/7d070e7d-9378-4ff6-b1fc-3b1571941a61)
+![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/442b5a0e-cfb1-4ce0-affa-6eb59053bd4f)
 
 <img src="https://github.com/Pauloo27/gommit/raw/master/.assets/commit.gif" alt="Usage example gif" height="250x" />
 
