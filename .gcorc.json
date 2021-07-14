@@ -1,3 +1,17 @@
 {
-  "PrefixPack": "text"
+  "PrefixPack": "text",
+  "PreCommit": [
+    {
+      "Command": "make",
+      "ExitOnFail": true,
+      "Ask": false
+    }
+  ],
+  "PostCommit": [
+    {
+      "Command": "git push",
+      "ExitOnFail": true,
+      "Ask": true
+    }
+  ]
 }
