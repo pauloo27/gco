@@ -8,7 +8,34 @@ Write God-tier commits.
 
 ## Hooks
 
-WIP...
+You can add Pre and Post commit hooks in `.gcorc.json`, like that:
+```json
+...
+
+  "PreCommit": [
+    {
+      "Command": "make",
+      "ExitOnFail": true,
+      "Ask": false
+    }
+  ],
+  "PostCommit": [
+    {
+      "Command": "git push",
+      "ExitOnFail": true,
+      "Ask": true
+    }
+  ]
+  
+...
+```
+
+A hook is made of:
+- Command: the command to run.
+- ExitOnFail: if the command fail, should the commit be cancelled?
+- Ask: ask for confirmation before running the hook.
+
+_GCO hooks does not replace Git hooks._
 
 ## License
 
