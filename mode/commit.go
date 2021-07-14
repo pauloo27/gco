@@ -27,7 +27,7 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 }
 
 func Commit() {
-	c, err := holder.GetProjectConfig()
+	conf, err := holder.GetProjectConfig()
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("GCO config not found. Create one with gco --init")
@@ -36,7 +36,7 @@ func Commit() {
 		fmt.Println(err)
 		os.Exit(-1)
 	}
-	pack := prefix.GetPrefixPack(c.PrefixPack)
+	pack := prefix.GetPrefixPack(conf.PrefixPack)
 	if pack == nil {
 		fmt.Println("Prefix pack not found")
 		os.Exit(-1)
@@ -46,6 +46,8 @@ func Commit() {
 	out := prompt.NewStderrWriter()
 	promptPrefix := " λ "
 	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
+
+	git.CallPreCommitHooks(conf)
 
 	branch, err := git.GetCurrentBranchName()
 	utils.PrettyPrint(out,
@@ -127,4 +129,6 @@ func Commit() {
 		)
 		os.Exit(-1)
 	}
+
+	git.CallPostCommitHooks(conf)
 }

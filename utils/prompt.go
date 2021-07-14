@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/c-bata/go-prompt"
 )
@@ -38,6 +39,17 @@ func Prompt(prefix string, completer prompt.Completer, options ...prompt.Option)
 	)
 }
 
+func LowerCasedPrompt(prefix string, completer prompt.Completer, options ...prompt.Option) string {
+	return strings.ToLower(Prompt(prefix, completer, options...))
+}
+
 func EmptyCompleter(d prompt.Document) []prompt.Suggest {
 	return nil
+}
+
+func YesOrNoCompleter(d prompt.Document) []prompt.Suggest {
+	return []prompt.Suggest{
+		{Description: "yes", Text: "y"},
+		{Description: "no", Text: "n"},
+	}
 }
