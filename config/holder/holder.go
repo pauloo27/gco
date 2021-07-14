@@ -1,37 +1,38 @@
-package config
+package holder
 
 import (
 	"os"
 
+	"github.com/Pauloo27/gco/config"
 	"github.com/Pauloo27/gco/utils/git"
 )
 
-var defaultConfig = &Config{
+var defaultConfig = &config.Config{
 	PrefixPack: "text",
 }
 
-var globalConfig *Config
-var projectConfig *Config
+var globalConfig *config.Config
+var projectConfig *config.Config
 var projectConfigNotFound bool
 
 var rcFileName = ".gcorc.json"
 
-func StoreProjectConfig(conf *Config) error {
+func StoreProjectConfig(conf *config.Config) error {
 	gitRoot, err := git.GetRepositoryRoot()
 	if err != nil {
 		return err
 	}
-	return StoreConfig(conf, gitRoot+"/"+rcFileName)
+	return config.StoreConfig(conf, gitRoot+"/"+rcFileName)
 }
 
-func GetProjectConfig() (*Config, error) {
+func GetProjectConfig() (*config.Config, error) {
 	if projectConfig == nil && !projectConfigNotFound {
 		var err error
 		gitRoot, err := git.GetRepositoryRoot()
 		if err != nil {
 			return nil, err
 		}
-		projectConfig, err = LoadConfig(gitRoot + "/" + rcFileName)
+		projectConfig, err = config.LoadConfig(gitRoot + "/" + rcFileName)
 		if err != nil {
 			if os.IsNotExist(err) {
 				projectConfigNotFound = true

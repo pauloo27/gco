@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/Pauloo27/gco/config"
+	"github.com/Pauloo27/gco/config/holder"
 	"github.com/Pauloo27/gco/prefix"
 	"github.com/Pauloo27/gco/utils"
 	"github.com/c-bata/go-prompt"
@@ -35,7 +36,7 @@ func Init() {
 	c := config.Config{
 		PrefixPack: pack.Name,
 	}
-	err := config.StoreProjectConfig(&c)
+	err := holder.StoreProjectConfig(&c)
 	if err != nil {
 		fmt.Println("Something went wrong while storing the config", err)
 		os.Exit(-1)

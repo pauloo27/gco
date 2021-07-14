@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/Pauloo27/gco/config"
+	"github.com/Pauloo27/gco/config/holder"
 	"github.com/Pauloo27/gco/prefix"
 	"github.com/Pauloo27/gco/utils"
 	"github.com/Pauloo27/gco/utils/git"
@@ -27,7 +27,7 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 }
 
 func Commit() {
-	c, err := config.GetProjectConfig()
+	c, err := holder.GetProjectConfig()
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("GCO config not found. Create one with gco --init")
