@@ -6,6 +6,10 @@ Write God-tier commits.
 
 <img src="https://github.com/Pauloo27/gommit/raw/master/.assets/commit.gif" alt="Usage example gif" height="250x" />
 
+## Hooks
+
+WIP...
+
 ## License
 
 <img src="https://i.imgur.com/AuQQfiB.png" alt="GPL Logo" height="100px" />
