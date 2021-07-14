@@ -1,7 +1,7 @@
 version: v0
 
 runs:
-  - name: Build Gommit
+  - name: Build GCO
     tasks:
       - name: build
         runtime:
@@ -13,20 +13,20 @@ runs:
           - clone:
           - restore_cache:
               keys:
-                - pkg-cache-sum-{{ md5sum "go.sum" }}
+                - pkg-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               dest_dir: /go/pkg
           - restore_cache:
               keys:
-                - build-cache-sum-{{ md5sum "go.sum" }}
+                - build-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               dest_dir: ~/.cache/go-build
           - run:
               name: build gommit
               command: make build 
           - save_cache:
-              key: pkg-cache-sum-{{ md5sum "go.sum" }}
+              key: pkg-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               contents:
                 - source_dir: /go/pkg
           - save_cache:
-              key: build-cache-sum-{{ md5sum "go.sum" }}
+              key: build-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               contents:
                 - source_dir: ~/.cache/go-build
