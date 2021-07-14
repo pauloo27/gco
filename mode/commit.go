@@ -41,11 +41,36 @@ func Commit(skipHooks bool) {
 		fmt.Println("Prefix pack not found")
 		os.Exit(-1)
 	}
-	// TODO: prompt files to add
 
 	out := prompt.NewStderrWriter()
 	promptPrefix := " λ "
 	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
+	files, err := git.GetChangedFiles()
+
+	if err != nil {
+		fmt.Println("Cannot get repository status")
+		os.Exit(-1)
+	}
+
+	fmt.Println()
+	utils.PrettyPrint(out, "Repository status:\n")
+	utils.PrettyPrint(out, "(", prompt.Green, "green ", prompt.DefaultColor,
+		"files are going to committed)\n",
+	)
+	if len(files) == 0 {
+		utils.PrettyPrint(out, "Nothing changed since last commit\n")
+		os.Exit(-1)
+	}
+	for _, file := range files {
+		color := prompt.Red
+		if file.Tracked {
+			color = prompt.Green
+		}
+		utils.PrettyPrint(out,
+			" -> ", color, file.Name, file.Status, prompt.DefaultColor, "\n",
+		)
+	}
+	fmt.Println()
 
 	if !skipHooks {
 		git.CallPreCommitHooks(conf)

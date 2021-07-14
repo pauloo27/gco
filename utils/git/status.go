@@ -58,3 +58,13 @@ func GetChangedFiles() ([]*ChangedFile, error) {
 	}
 	return files, nil
 }
+
+func Add(file string) error {
+	_, err := RunGitCommand("add", file)
+	return err
+}
+
+func Remove(file string) error {
+	_, err := RunGitCommand("restore", "--staged", file)
+	return err
+}
