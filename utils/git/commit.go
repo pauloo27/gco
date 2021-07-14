@@ -5,8 +5,7 @@ import (
 	"os/exec"
 )
 
-func CommitToStdout(prefix, title, message string) error {
-	commit := prefix + title + "\n\n" + message
+func CommitToStdout(commit string) error {
 	cmd := exec.Command("git", "commit", "-m", commit)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

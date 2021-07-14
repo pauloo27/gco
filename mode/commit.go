@@ -109,8 +109,22 @@ func Commit() {
 		}
 		message += "\n"
 	}
-	err = git.CommitToStdout(prefix, title, message)
+	commit := prefix + title + "\n\n" + message
+	err = git.CommitToStdout(commit)
 	if err != nil {
+		err := os.WriteFile(".gcobkp", []byte(commit), 0666)
+		if err != nil {
+			os.Exit(-1)
+		}
+		utils.PrettyPrint(out,
+			"Looks like the commit ", prompt.Red, "failed", prompt.DefaultColor,
+			". No worries! It was saved to ", prompt.Blue, ".gcobkp",
+			prompt.DefaultColor, "\n",
+		)
+		utils.PrettyPrint(out,
+			"You can ", prompt.Blue, "retry ", prompt.DefaultColor, "using ",
+			prompt.Blue, "gco --retry", prompt.DefaultColor, "\n",
+		)
 		os.Exit(-1)
 	}
 }
