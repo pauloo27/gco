@@ -1,4 +1,4 @@
-# GOMMIT
+# GCO
 
 Write God-tier commits.
 
