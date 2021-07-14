@@ -30,7 +30,7 @@ func Commit() {
 	c, err := config.GetProjectConfig()
 	if err != nil {
 		if os.IsNotExist(err) {
-			fmt.Println("Gommit config not found. Create one with gco --init")
+			fmt.Println("GCO config not found. Create one with gco --init")
 			os.Exit(-1)
 		}
 		fmt.Println(err)
