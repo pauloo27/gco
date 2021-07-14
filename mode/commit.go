@@ -26,7 +26,7 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 	}
 }
 
-func Commit() {
+func Commit(skipHooks bool) {
 	conf, err := holder.GetProjectConfig()
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -47,7 +47,9 @@ func Commit() {
 	promptPrefix := " λ "
 	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
 
-	git.CallPreCommitHooks(conf)
+	if !skipHooks {
+		git.CallPreCommitHooks(conf)
+	}
 
 	branch, err := git.GetCurrentBranchName()
 	utils.PrettyPrint(out,
@@ -130,5 +132,7 @@ func Commit() {
 		os.Exit(-1)
 	}
 
-	git.CallPostCommitHooks(conf)
+	if !skipHooks {
+		git.CallPostCommitHooks(conf)
+	}
 }

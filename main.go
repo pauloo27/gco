@@ -6,12 +6,13 @@ import (
 	"github.com/Pauloo27/gco/mode"
 )
 
-var isHelp, isInit, isRetry bool
+var isHelp, isInit, isRetry, isSkip bool
 
 func init() {
 	flag.BoolVar(&isHelp, "help", false, "show command help")
 	flag.BoolVar(&isInit, "init", false, "create a project config")
 	flag.BoolVar(&isRetry, "retry", false, "retry a commit from .gobkp")
+	flag.BoolVar(&isSkip, "skip", false, "skip pre/post hooks")
 }
 
 func main() {
@@ -28,5 +29,5 @@ func main() {
 		mode.Retry()
 		return
 	}
-	mode.Commit()
+	mode.Commit(isSkip)
 }
