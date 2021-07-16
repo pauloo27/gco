@@ -15,7 +15,7 @@ var globalConfig *config.Config
 var projectConfig *config.Config
 var projectConfigNotFound bool
 
-var rcFileName = ".gcorc.json"
+var rcFileName = ".gco.json"
 
 func StoreProjectConfig(conf *config.Config) error {
 	gitRoot, err := git.GetRepositoryRoot()
