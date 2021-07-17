@@ -20,7 +20,7 @@ runs:
                 - build-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               dest_dir: ~/.cache/go-build
           - run:
-              name: build gommit
+              name: build gco
               command: make build 
           - save_cache:
               key: pkg-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
