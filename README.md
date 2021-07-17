@@ -2,7 +2,10 @@
 
 Write God-tier commits.
 
-![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/10e3d5ed-6af2-4147-81f6-5de9155b516e)
+[Agola CI](https://ci.notagovernment.agency/user/Pauloo27/projects/GCO.proj)
+
+[![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/10e3d5ed-6af2-4147-81f6-5de9155b516e)](https://ci.notagovernment.agency/user/Pauloo27/projects/GCO.proj)
+
 
 <img src="https://github.com/Pauloo27/gommit/raw/master/.assets/commit.gif" alt="Usage example gif" height="250x" />
 
