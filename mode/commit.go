@@ -140,11 +140,10 @@ func Commit(skipHooks bool) {
 	}
 
 	if conf.AskCISkip {
-		yesOrNo := utils.Prompt(
+		input := utils.PromptYesOrNot(
 			" Skip CI? [y/N] ",
-			utils.YesOrNoCompleter,
 		)
-		if yesOrNo == "yes" {
+		if input == "yes" {
 			message += "[ci skip]"
 		}
 	}

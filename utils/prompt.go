@@ -53,3 +53,18 @@ func YesOrNoCompleter(d prompt.Document) []prompt.Suggest {
 		{Description: "no", Text: "n"},
 	}
 }
+
+func PromptYesOrNot(prompt string) string {
+	input := LowerCasedPrompt(
+		" Skip CI? [y/N] ",
+		YesOrNoCompleter,
+	)
+	if input == "yes" || input == "y" {
+		return "yes"
+	}
+	if input == "no" || input == "n" {
+		return "no"
+	}
+	return input
+
+}

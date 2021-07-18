@@ -27,7 +27,7 @@ func callHooks(title string, hooks []config.HookAction) {
 			"-> ", prompt.Yellow, hook.Command, prompt.DefaultColor, "\n",
 		)
 		if hook.Ask {
-			skip := utils.LowerCasedPrompt(" Skip? [y/N] ", utils.YesOrNoCompleter)
+			skip := utils.PromptYesOrNot(" Skip? [y/N] ")
 			if skip == "y" {
 				utils.PrettyPrint(
 					out,
