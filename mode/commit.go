@@ -138,6 +138,17 @@ func Commit(skipHooks bool) {
 		}
 		message += "\n"
 	}
+
+	if conf.AskCISkip {
+		yesOrNo := utils.Prompt(
+			" Skip CI? [y/N] ",
+			utils.YesOrNoCompleter,
+		)
+		if yesOrNo == "yes" {
+			message += "[ci skip]"
+		}
+	}
+
 	commit := prefix + title + "\n\n" + message
 	err = git.CommitToStdout(commit)
 	if err != nil {

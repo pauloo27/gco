@@ -9,4 +9,5 @@ type Config struct {
 	PrefixPack string
 	PreCommit  []HookAction
 	PostCommit []HookAction
+	AskCISkip  bool
 }
