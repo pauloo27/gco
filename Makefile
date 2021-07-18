@@ -1,4 +1,4 @@
-BINARY_NAME = gommit
+BINARY_NAME = gco
 
 build:
 	go build -v
