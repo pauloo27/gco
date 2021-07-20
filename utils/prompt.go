@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/c-bata/go-prompt"
@@ -56,7 +57,7 @@ func YesOrNoCompleter(d prompt.Document) []prompt.Suggest {
 
 func PromptYesOrNot(prompt string) string {
 	input := LowerCasedPrompt(
-		" Skip CI? [y/N] ",
+		prompt,
 		YesOrNoCompleter,
 	)
 	if input == "yes" || input == "y" {
@@ -67,4 +68,24 @@ func PromptYesOrNot(prompt string) string {
 	}
 	return input
 
+}
+
+func CompleterFrom(values []string) func(prompt.Document) []prompt.Suggest {
+	s := []prompt.Suggest{}
+	for _, value := range values {
+		s = append(s, prompt.Suggest{Text: value})
+	}
+	return func(d prompt.Document) []prompt.Suggest {
+		return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+	}
+}
+
+func IndexedCompleter(values []string) func(prompt.Document) []prompt.Suggest {
+	s := []prompt.Suggest{}
+	for i, value := range values {
+		s = append(s, prompt.Suggest{Text: strconv.Itoa(i + 1), Description: value})
+	}
+	return func(d prompt.Document) []prompt.Suggest {
+		return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+	}
 }
