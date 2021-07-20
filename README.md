@@ -11,7 +11,7 @@ Write God-tier commits.
 
 ## Hooks
 
-You can add Pre and Post commit hooks in `.gcorc.json`, like that:
+You can add Pre and Post commit hooks in `.gco.json`, like that:
 ```json
 ...
 
