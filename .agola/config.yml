@@ -26,6 +26,8 @@ runs:
               contents:
                 - source_dir: .
                   dest_dir: .
+                  paths: 
+                    - "**"
       - name: test
         depends:
           - build
