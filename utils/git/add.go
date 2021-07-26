@@ -10,13 +10,13 @@ import (
 	"github.com/c-bata/go-prompt"
 )
 
-func parseInstruction(instruction string, filesMap map[string]bool, files []string) (map[string]bool, error) {
+func parseInstruction(instruction string, filesMap map[string]bool, files []string) error {
 	newFilesMap := filesMap
 	if instruction == "*" {
 		for file := range newFilesMap {
 			newFilesMap[file] = true
 		}
-		return newFilesMap, nil
+		return nil
 	}
 	splittedString := strings.Split(instruction, "-")
 	if len(splittedString) == 1 {
@@ -29,10 +29,10 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 		}
 		number, err := strconv.Atoi(entry)
 		if err != nil {
-			return newFilesMap, err
+			return err
 		}
 		newFilesMap[files[number-1]] = value
-		return newFilesMap, nil
+		return nil
 	} else if len(splittedString) == 2 {
 		value := true
 		entry := splittedString
@@ -44,18 +44,18 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 		startStr, endStr := entry[0], entry[1]
 		start, err := strconv.Atoi(startStr)
 		if err != nil {
-			return newFilesMap, err
+			return err
 		}
 		end, err := strconv.Atoi(endStr)
 		if err != nil {
-			return newFilesMap, err
+			return err
 		}
 		for i := start; i <= end; i++ {
 			newFilesMap[files[i-1]] = value
 		}
-		return newFilesMap, nil
+		return nil
 	}
-	return newFilesMap, errors.New("Invalid instruction")
+	return errors.New("Invalid instruction")
 }
 
 func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string) {

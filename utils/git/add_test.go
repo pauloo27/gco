@@ -46,35 +46,51 @@ func TestParseInstructions(t *testing.T) {
 
 	t.Run("Simple number", func(t *testing.T) {
 		filesMap, _ := getFilesMap(false)
-		newMap, err := parseInstruction("1", filesMap, rawFiles)
+		err := parseInstruction("1", filesMap, rawFiles)
 		assert.Nil(t, err)
-		assertFiles(t, rawFiles, []int{1}, newMap)
+		assertFiles(t, rawFiles, []int{1}, filesMap)
 	})
 	t.Run("Star", func(t *testing.T) {
 		filesMap, allIndexes := getFilesMap(false)
-		newMap, err := parseInstruction("*", filesMap, rawFiles)
+		err := parseInstruction("*", filesMap, rawFiles)
 		assert.Nil(t, err)
-		assertFiles(t, rawFiles, allIndexes, newMap)
+		assertFiles(t, rawFiles, allIndexes, filesMap)
 	})
 	t.Run("Range", func(t *testing.T) {
 		filesMap, _ := getFilesMap(false)
-		newMap, err := parseInstruction("2-5", filesMap, rawFiles)
+		err := parseInstruction("2-5", filesMap, rawFiles)
 		assert.Nil(t, err)
-		assertFiles(t, rawFiles, []int{2, 3, 4, 5}, newMap)
+		assertFiles(t, rawFiles, []int{2, 3, 4, 5}, filesMap)
 	})
 	t.Run("Negate", func(t *testing.T) {
 		filesMap, _ := getFilesMap(true)
-		newMap, err := parseInstruction("^5", filesMap, rawFiles)
+		err := parseInstruction("^5", filesMap, rawFiles)
 		assert.Nil(t, err)
-		assertFiles(t, rawFiles, []int{1, 2, 3, 4, 6}, newMap)
+		assertFiles(t, rawFiles, []int{1, 2, 3, 4, 6}, filesMap)
 	})
 	t.Run("Negate range", func(t *testing.T) {
 		filesMap, _ := getFilesMap(true)
-		newMap, err := parseInstruction("^2-5", filesMap, rawFiles)
+		err := parseInstruction("^2-5", filesMap, rawFiles)
 		assert.Nil(t, err)
-		assertFiles(t, rawFiles, []int{1, 6}, newMap)
+		assertFiles(t, rawFiles, []int{1, 6}, filesMap)
 	})
-	// TODO: instruction list
+	t.Run("Instruction list", func(t *testing.T) {
+		filesMap, allIndexes := getFilesMap(true)
+		var err error
+
+		err = parseInstruction("*", filesMap, rawFiles)
+		assert.Nil(t, err)
+		assertFiles(t, rawFiles, allIndexes, filesMap)
+
+		err = parseInstruction("^3", filesMap, rawFiles)
+		assert.Nil(t, err)
+		assertFiles(t, rawFiles, []int{1, 2, 4, 5, 6}, filesMap)
+
+		err = parseInstruction("^1-4", filesMap, rawFiles)
+		assert.Nil(t, err)
+		assertFiles(t, rawFiles, []int{5, 6}, filesMap)
+	})
+
 	// TODO: index out of bounds (negative and 0 as well)
 	// TODO: invalid syntax: empty string
 	// TODO: invalid syntax: multiple negates
