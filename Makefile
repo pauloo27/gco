@@ -9,6 +9,9 @@ run: build
 install: build
 	sudo cp ./$(BINARY_NAME) /usr/bin/
 
+test:
+	go test -cover -parallel 5 -failfast  ./...
+
 update_mod:
 	go build -v -mod=mod
 
