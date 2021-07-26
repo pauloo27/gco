@@ -69,7 +69,7 @@ func TestParseInstructions(t *testing.T) {
 		assertFiles(t, rawFiles, []int{1, 2, 3, 4, 6}, newMap)
 	})
 	t.Run("Negate range", func(t *testing.T) {
-		filesMap, _ := getFilesMap(false)
+		filesMap, _ := getFilesMap(true)
 		newMap, err := parseInstruction("^2-5", filesMap, rawFiles)
 		assert.Nil(t, err)
 		assertFiles(t, rawFiles, []int{1, 6}, newMap)

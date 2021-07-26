@@ -34,8 +34,14 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 		newFilesMap[files[number-1]] = value
 		return newFilesMap, nil
 	} else if len(splittedString) == 2 {
+		value := true
+		entry := splittedString
+		if strings.HasPrefix(entry[0], "^") {
+			value = false
+			entry = []string{strings.TrimPrefix(splittedString[0], "^"), splittedString[1]}
+		}
 		// range
-		startStr, endStr := splittedString[0], splittedString[1]
+		startStr, endStr := entry[0], entry[1]
 		start, err := strconv.Atoi(startStr)
 		if err != nil {
 			return newFilesMap, err
@@ -44,7 +50,6 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 		if err != nil {
 			return newFilesMap, err
 		}
-		value := true
 		for i := start; i <= end; i++ {
 			newFilesMap[files[i-1]] = value
 		}
