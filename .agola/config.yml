@@ -27,6 +27,8 @@ runs:
                 - source_dir: .
                   dest_dir: .
       - name: test
+        depends:
+          - build
         runtime:
           type: pod
           arch: amd64
