@@ -22,6 +22,22 @@ runs:
           - run:
               name: build gco
               command: make build 
+          - save_to_workspace:
+              contents:
+                - source_dir: .
+                  dest_dir: .
+      - name: test
+        runtime:
+          type: pod
+          arch: amd64
+          containers:
+            - image: golang:1.16-stretch
+        steps:
+          - restore_workspace:
+              dest_dir: .
+          - run:
+              name: test gco
+              command: make test 
           - save_cache:
               key: pkg-cache-sum-{{ md5sum "go.sum" }}-{{ year }}-{{ month }}-{{ day }}
               contents:
