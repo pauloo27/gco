@@ -6,8 +6,9 @@ type HookAction struct {
 }
 
 type Config struct {
-	PrefixPack string
-	PreCommit  []HookAction
-	PostCommit []HookAction
-	AskCISkip  bool
+	PrefixPack       string
+	AskFilesToCommit bool
+	PreCommit        []HookAction
+	PostCommit       []HookAction
+	AskCISkip        bool
 }

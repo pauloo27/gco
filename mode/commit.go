@@ -43,8 +43,6 @@ func Commit(skipHooks bool) {
 	}
 
 	out := prompt.NewStderrWriter()
-	promptPrefix := " λ "
-	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
 	files, err := git.GetChangedFiles()
 
 	if err != nil {
@@ -61,16 +59,27 @@ func Commit(skipHooks bool) {
 		utils.PrettyPrint(out, "Nothing changed since last commit\n")
 		os.Exit(-1)
 	}
-	for _, file := range files {
+
+	filesName := []string{}
+	for id, file := range files {
 		color := prompt.Red
 		if file.Tracked {
 			color = prompt.Green
 		}
 		utils.PrettyPrint(out,
-			" -> ", color, file.Name, file.Status, prompt.DefaultColor, "\n",
+			" -> ", color, id+1, " ", file.Name, file.Status, prompt.DefaultColor, "\n",
 		)
+		filesName = append(filesName, file.Name)
 	}
+
 	fmt.Println()
+	if conf.AskFilesToCommit {
+		err = git.PromptFilesToAdd(out, filesName, files)
+		if err != nil {
+			fmt.Println("Cannot add files: ", err)
+			os.Exit(-1)
+		}
+	}
 
 	if !skipHooks {
 		git.CallPreCommitHooks(conf)
@@ -80,6 +89,9 @@ func Commit(skipHooks bool) {
 	utils.PrettyPrint(out,
 		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
 	)
+
+	promptPrefix := " λ "
+	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
 
 	fmt.Println("Enter a empty line to cancel the commit")
 	fmt.Printf("%s%s\n", strings.Repeat(" ", promptPrefixLen), strings.Repeat("-", 49))
