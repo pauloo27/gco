@@ -64,6 +64,10 @@ func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string, changedFiles
 			" Files to commit (enter ? for help) ", utils.IndexedCompleter(filesName),
 		)
 
+		if input == "" {
+			return nil
+		}
+
 		if input == "?" {
 			utils.PrettyPrint(out, "To commit files that are already added: ",
 				prompt.Blue, "press enter", prompt.DefaultColor, "\n",
