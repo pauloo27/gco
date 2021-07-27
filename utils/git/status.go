@@ -68,3 +68,10 @@ func Remove(file string) error {
 	_, err := RunGitCommand("restore", "--staged", file)
 	return err
 }
+
+func SetTrackStatus(file string, tracked bool) error {
+	if tracked {
+		return Add(file)
+	}
+	return Remove(file)
+}

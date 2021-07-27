@@ -2,7 +2,6 @@ package git
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -59,7 +58,7 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 	return errors.New("Invalid instruction")
 }
 
-func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string) {
+func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string, changedFiles []*ChangedFile) error {
 	for {
 		input := utils.Prompt(
 			" Files to commit (enter ? for help) ", utils.IndexedCompleter(filesName),
@@ -85,12 +84,30 @@ func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string) {
 			continue
 		}
 
-		filesToCommit := strings.Split(input, " ")
-		if len(filesToCommit) != 0 {
-			for _, file := range filesToCommit {
-				fmt.Println(file)
+		filesMap := map[string]bool{}
+		for _, file := range changedFiles {
+			filesMap[file.Name] = file.Tracked
+		}
+
+		instructions := strings.Split(input, " ")
+		if len(instructions) != 0 {
+			for _, instruction := range instructions {
+				err := parseInstruction(instruction, filesMap, filesName)
+				if err != nil {
+					return err
+				}
 			}
 		}
-		break
+		// once all the prompt is done, it's time to do what we were told to
+		for _, file := range changedFiles {
+			expectedStatus := filesMap[file.Name]
+			if expectedStatus != file.Tracked {
+				err := SetTrackStatus(file.Name, expectedStatus)
+				if err != nil {
+					return err
+				}
+			}
+		}
+		return nil
 	}
 }
