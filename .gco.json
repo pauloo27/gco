@@ -8,11 +8,5 @@
       "Ask": false
     }
   ],
-  "PostCommit": [
-    {
-      "Command": "git push",
-      "ExitOnFail": true,
-      "Ask": true
-    }
-  ]
+  "AskFilesToCommit": true
 }
