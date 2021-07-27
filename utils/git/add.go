@@ -11,6 +11,7 @@ import (
 )
 
 func parseInstruction(instruction string, filesMap map[string]bool, files []string) error {
+	// TODO: refactor
 	newFilesMap := filesMap
 	if instruction == "*" {
 		for file := range newFilesMap {
