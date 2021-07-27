@@ -24,10 +24,18 @@ runs:
               command: make build 
           - save_to_workspace:
               contents:
+                - source_dir: /go/pkg
+                  paths:
+                    - '**'
+                  dest_dir: /go/pkg
                 - source_dir: .
-                  dest_dir: .
-                  paths: 
-                    - "**"
+                  dest_dir: /root/project/
+                  paths:
+                    - '**'
+                - source_dir: /root/.cache/go-build
+                  dest_dir: /root/.cache/go-build
+                  paths:
+                    - '**'
       - name: test
         depends:
           - build
@@ -38,7 +46,7 @@ runs:
             - image: golang:1.16-stretch
         steps:
           - restore_workspace:
-              dest_dir: .
+              dest_dir: /
           - run:
               name: test gco
               command: make test 
