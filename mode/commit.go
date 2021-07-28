@@ -27,15 +27,21 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 }
 
 func Commit(skipHooks bool) {
-	conf, err := holder.GetProjectConfig()
+	conf, err, isProjectConf := holder.GetProjectConfigOrGlobal()
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("GCO config not found. Create one with gco --init")
+			fmt.Println("You can also create a global config with gco --init-global")
 			os.Exit(-1)
 		}
 		fmt.Println(err)
 		os.Exit(-1)
 	}
+
+	if !isProjectConf {
+		fmt.Println("Using global config, to create one for you project, run gco --init")
+	}
+
 	pack := prefix.GetPrefixPack(conf.PrefixPack)
 	if pack == nil {
 		fmt.Println("Prefix pack not found")

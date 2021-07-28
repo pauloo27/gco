@@ -24,7 +24,7 @@ func initCompleter(d prompt.Document) []prompt.Suggest {
 	return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
 
-func Init() {
+func initConf(isProject bool) {
 	name := utils.Prompt("Prefix pack: ", initCompleter)
 
 	pack := prefix.GetPrefixPack(name)
@@ -32,13 +32,25 @@ func Init() {
 		fmt.Println("Prefix pack not found =(")
 		os.Exit(-1)
 	}
-	// TODO: store config
 	c := config.Config{
 		PrefixPack: pack.Name,
 	}
-	err := holder.StoreProjectConfig(&c)
+	var err error
+	if isProject {
+		err = holder.StoreProjectConfig(&c)
+	} else {
+		err = holder.StoreGlobalConfig(&c)
+	}
 	if err != nil {
 		fmt.Println("Something went wrong while storing the config", err)
 		os.Exit(-1)
 	}
+}
+
+func Init() {
+	initConf(true)
+}
+
+func InitGlobal() {
+	initConf(false)
 }
