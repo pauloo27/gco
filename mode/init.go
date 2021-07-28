@@ -8,6 +8,7 @@ import (
 	"github.com/Pauloo27/gco/config/holder"
 	"github.com/Pauloo27/gco/prefix"
 	"github.com/Pauloo27/gco/utils"
+	"github.com/Pauloo27/gco/version"
 	"github.com/c-bata/go-prompt"
 )
 
@@ -34,6 +35,7 @@ func initConf(isProject bool) {
 	}
 	c := config.Config{
 		PrefixPack: pack.Name,
+		Version:    version.VERSION,
 	}
 	var err error
 	if isProject {

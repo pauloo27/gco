@@ -6,6 +6,7 @@ type HookAction struct {
 }
 
 type Config struct {
+	Version          string
 	PrefixPack       string
 	AskFilesToCommit bool
 	PreCommit        []HookAction
