@@ -26,6 +26,39 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 	}
 }
 
+func listChangedFiles(out prompt.ConsoleWriter) ([]*git.ChangedFile, []string) {
+	files, err := git.GetChangedFiles()
+
+	if err != nil {
+		fmt.Println("Cannot get repository status")
+		os.Exit(-1)
+	}
+
+	if len(files) == 0 {
+		utils.PrettyPrint(out, "Nothing changed since last commit\n")
+		os.Exit(-1)
+	}
+
+	fmt.Println()
+	utils.PrettyPrint(out, "Repository status:\n")
+	utils.PrettyPrint(out, "(", prompt.Green, "green ", prompt.DefaultColor,
+		"files are going to committed)\n",
+	)
+	filesName := []string{}
+	for id, file := range files {
+		color := prompt.Red
+		if file.Tracked {
+			color = prompt.Green
+		}
+		utils.PrettyPrint(out,
+			" -> ", color, id+1, " ", file.Name, file.Status, prompt.DefaultColor, "\n",
+		)
+		filesName = append(filesName, file.Name)
+	}
+	fmt.Println()
+	return files, filesName
+}
+
 func Commit(skipHooks bool) {
 	conf, err, isProjectConf := holder.GetProjectConfigOrGlobal()
 	if err != nil {
@@ -49,52 +82,26 @@ func Commit(skipHooks bool) {
 	}
 
 	out := prompt.NewStderrWriter()
-	files, err := git.GetChangedFiles()
 
-	if err != nil {
-		fmt.Println("Cannot get repository status")
-		os.Exit(-1)
-	}
-
-	fmt.Println()
-	utils.PrettyPrint(out, "Repository status:\n")
-	utils.PrettyPrint(out, "(", prompt.Green, "green ", prompt.DefaultColor,
-		"files are going to committed)\n",
+	branch, err := git.GetCurrentBranchName()
+	utils.PrettyPrint(out,
+		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
 	)
-	if len(files) == 0 {
-		utils.PrettyPrint(out, "Nothing changed since last commit\n")
-		os.Exit(-1)
-	}
 
-	filesName := []string{}
-	for id, file := range files {
-		color := prompt.Red
-		if file.Tracked {
-			color = prompt.Green
-		}
-		utils.PrettyPrint(out,
-			" -> ", color, id+1, " ", file.Name, file.Status, prompt.DefaultColor, "\n",
-		)
-		filesName = append(filesName, file.Name)
-	}
+	files, filesName := listChangedFiles(out)
 
-	fmt.Println()
 	if conf.AskFilesToCommit {
 		err = git.PromptFilesToAdd(out, filesName, files)
 		if err != nil {
 			fmt.Println("Cannot add files: ", err)
 			os.Exit(-1)
 		}
+		files, filesName = listChangedFiles(out)
 	}
 
 	if !skipHooks {
 		git.CallPreCommitHooks(conf)
 	}
-
-	branch, err := git.GetCurrentBranchName()
-	utils.PrettyPrint(out,
-		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
-	)
 
 	promptPrefix := " λ "
 	promptPrefixLen := utf8.RuneCountInString(promptPrefix)
