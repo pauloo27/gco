@@ -12,8 +12,8 @@ install: build
 test:
 	go test -cover -parallel 5 -failfast  ./...
 
-update_mod:
-	go build -v -mod=mod
+tidy:
+	go mod tidy
 
 # (build but with a smaller binary)
 dist:
