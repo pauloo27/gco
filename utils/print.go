@@ -26,7 +26,7 @@ func PrettyPrint(out prompt.ConsoleWriter, components ...interface{}) {
 	}
 	err := out.Flush()
 	if err != nil {
-		fmt.Println("Something went wrong while writting to output console")
+		fmt.Println("Something went wrong while writing to output console")
 		os.Exit(-1)
 	}
 }

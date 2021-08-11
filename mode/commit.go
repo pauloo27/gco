@@ -85,7 +85,7 @@ func Commit(skipHooks bool) {
 
 	branch, err := git.GetCurrentBranchName()
 	utils.PrettyPrint(out,
-		"You are commiting to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
+		"You are committing to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
 	)
 
 	files, filesName := listChangedFiles(out)
@@ -123,7 +123,7 @@ func Commit(skipHooks bool) {
 	out.EraseLine()
 	err = out.Flush()
 	if err != nil {
-		fmt.Println("Something went wrong while writting to output console")
+		fmt.Println("Something went wrong while writing to output console")
 		os.Exit(-1)
 	}
 
