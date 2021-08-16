@@ -15,6 +15,9 @@ test:
 tidy:
 	go mod tidy
 
+lint:
+	revive -formatter friendly -config revive.toml ./...
+
 # (build but with a smaller binary)
 dist:
 	go build -ldflags="-w -s" -gcflags=all=-l -v
