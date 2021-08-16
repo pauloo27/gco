@@ -9,6 +9,11 @@ Write God-tier commits.
 
 <img src="https://github.com/Pauloo27/gco/raw/master/.assets/commit.gif" alt="Usage example gif" height="250x" />
 
+## Install
+
+If you have Go installed, you can simply do:
+`go get -u github.com/Pauloo27/gco`
+
 ## Hooks
 
 You can add Pre and Post commit hooks in `.gco.json`, like that:
