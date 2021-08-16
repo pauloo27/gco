@@ -84,6 +84,10 @@ func Commit(skipHooks bool) {
 	out := prompt.NewStderrWriter()
 
 	branch, err := git.GetCurrentBranchName()
+	if err != nil {
+		fmt.Println("Cannot get current branch name")
+		os.Exit(-1)
+	}
 	utils.PrettyPrint(out,
 		"You are committing to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
 	)
@@ -96,7 +100,6 @@ func Commit(skipHooks bool) {
 			fmt.Println("Cannot add files: ", err)
 			os.Exit(-1)
 		}
-		files, filesName = listChangedFiles(out)
 	}
 
 	if !skipHooks {
@@ -176,7 +179,7 @@ func Commit(skipHooks bool) {
 	commit := prefix + title + "\n\n" + message
 	err = git.CommitToStdout(commit)
 	if err != nil {
-		err := os.WriteFile(".gcobkp", []byte(commit), 0666)
+		err := os.WriteFile(".gcobkp", []byte(commit), 0600)
 		if err != nil {
 			os.Exit(-1)
 		}

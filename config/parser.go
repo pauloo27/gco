@@ -6,10 +6,11 @@ import (
 	"os"
 )
 
+/* #nosec G304 */
 func LoadConfig(path string) (conf *Config, err error) {
 	conf = &Config{}
 	var file *os.File
-	file, err = os.OpenFile(path, os.O_RDONLY, 0x770)
+	file, err = os.OpenFile(path, os.O_RDONLY, 0600)
 	if err != nil {
 		return
 	}

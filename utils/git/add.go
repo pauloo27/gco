@@ -55,7 +55,7 @@ func parseInstruction(instruction string, filesMap map[string]bool, files []stri
 		}
 		return nil
 	}
-	return errors.New("Invalid instruction")
+	return errors.New("invalid instruction")
 }
 
 func PromptFilesToAdd(out prompt.ConsoleWriter, filesName []string, changedFiles []*ChangedFile) error {

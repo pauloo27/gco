@@ -12,7 +12,7 @@ import (
 )
 
 func callHooks(title string, hooks []config.HookAction) {
-	if hooks == nil || len(hooks) == 0 {
+	if len(hooks) == 0 {
 		return
 	}
 	out := prompt.NewStdoutWriter()

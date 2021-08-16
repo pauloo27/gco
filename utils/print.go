@@ -10,18 +10,18 @@ import (
 
 func PrettyPrint(out prompt.ConsoleWriter, components ...interface{}) {
 	for _, component := range components {
-		switch component.(type) {
+		switch component := component.(type) {
 		case string:
-			out.WriteStr(component.(string))
+			out.WriteStr(component)
 		case int:
-			out.WriteStr(strconv.Itoa(component.(int)))
+			out.WriteStr(strconv.Itoa(component))
 		case prompt.Color:
-			c := component.(prompt.Color)
+			c := component
 			bold := true
 			if c == prompt.DefaultColor {
 				bold = false
 			}
-			out.SetColor(component.(prompt.Color), prompt.DefaultColor, bold)
+			out.SetColor(component, prompt.DefaultColor, bold)
 		}
 	}
 	err := out.Flush()

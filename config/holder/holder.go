@@ -7,10 +7,6 @@ import (
 	"github.com/Pauloo27/gco/utils/git"
 )
 
-var defaultConfig = &config.Config{
-	PrefixPack: "text",
-}
-
 var globalConfig = &config.Config{}
 var projectConfig = &config.Config{}
 

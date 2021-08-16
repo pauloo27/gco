@@ -18,7 +18,7 @@ func RunGitCommand(params ...string) (string, error) {
 func GetRepositoryRoot() (string, error) {
 	root, err := RunGitCommand("rev-parse", "--show-toplevel")
 	if err != nil {
-		err = errors.New("You are not inside a git repository")
+		err = errors.New("you are not inside a git repository")
 	}
 	return root, err
 }
