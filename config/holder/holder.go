@@ -50,7 +50,7 @@ func GetProjectConfig() (*config.Config, error) {
 	return projectConfig, err
 }
 
-func GetProjectConfigOrGlobal() (conf *config.Config, err error, isFromProject bool) {
+func GetProjectConfigOrGlobal() (conf *config.Config, isFromProject bool, err error) {
 	conf, err = GetProjectConfig()
 	if err == nil {
 		isFromProject = true

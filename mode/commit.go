@@ -60,7 +60,7 @@ func listChangedFiles(out prompt.ConsoleWriter) ([]*git.ChangedFile, []string) {
 }
 
 func Commit(skipHooks bool) {
-	conf, err, isProjectConf := holder.GetProjectConfigOrGlobal()
+	conf, isProjectConf, err := holder.GetProjectConfigOrGlobal()
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("GCO config not found. Create one with gco --init")
