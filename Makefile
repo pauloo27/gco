@@ -18,6 +18,18 @@ tidy:
 lint:
 	revive -formatter friendly -config revive.toml ./...
 
+spell:
+	misspell -error ./**
+
+staticcheck:
+	staticcheck ./...
+
+gosec:
+	gosec -tests ./... 
+
+inspect: lint spell gosec staticcheck
+
+
 # (build but with a smaller binary)
 dist:
 	go build -ldflags="-w -s" -gcflags=all=-l -v
