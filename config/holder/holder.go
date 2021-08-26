@@ -10,14 +10,14 @@ import (
 var globalConfig = &config.Config{}
 var projectConfig = &config.Config{}
 
-var rcFileName = ".gco.json"
+var configFileName = "gco.json"
 
 func StoreGlobalConfig(conf *config.Config) error {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return err
 	}
-	return config.StoreConfig(conf, home+"/"+rcFileName)
+	return config.StoreConfig(conf, home+"/.config/"+configFileName)
 }
 
 func StoreProjectConfig(conf *config.Config) error {
@@ -25,7 +25,7 @@ func StoreProjectConfig(conf *config.Config) error {
 	if err != nil {
 		return err
 	}
-	return config.StoreConfig(conf, gitRoot+"/"+rcFileName)
+	return config.StoreConfig(conf, gitRoot+"/."+configFileName)
 }
 
 func GetGlobalConfig() (*config.Config, error) {
@@ -33,7 +33,7 @@ func GetGlobalConfig() (*config.Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = loadConfig(home+"/"+rcFileName, globalConfig)
+	err = loadConfig(home+"/.config/"+configFileName, globalConfig)
 	return globalConfig, err
 }
 
@@ -42,7 +42,7 @@ func GetProjectConfig() (*config.Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = loadConfig(gitRoot+"/"+rcFileName, projectConfig)
+	err = loadConfig(gitRoot+"/."+configFileName, projectConfig)
 	return projectConfig, err
 }
 
