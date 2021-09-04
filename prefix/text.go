@@ -47,7 +47,7 @@ var TextPrefix = PrefixPack{
 		},
 		{
 			Description: "add tag/release",
-			Name:        "tag",
+			Name:        "release",
 		},
 		{
 			Description: "fix typo",
