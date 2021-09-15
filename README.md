@@ -12,7 +12,7 @@ Write God-tier commits.
 ## Install
 
 If you have Go installed, you can simply do:
-`go get -u github.com/Pauloo27/gco`
+`go install github.com/Pauloo27/gco@latest`
 
 ## Hooks
 
