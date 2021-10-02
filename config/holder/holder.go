@@ -2,6 +2,7 @@ package holder
 
 import (
 	"os"
+	"strings"
 
 	"github.com/Pauloo27/gco/config"
 	"github.com/Pauloo27/gco/utils/git"
@@ -13,11 +14,20 @@ var projectConfig = &config.Config{}
 var configFileName = "gco.json"
 
 func StoreGlobalConfig(conf *config.Config) error {
-	home, err := os.UserHomeDir()
-	if err != nil {
-		return err
+	// tries to read env... if it's not found, use ~/.config
+	configHome := os.Getenv("XDG_CONFIG_HOME")
+	if configHome == "" {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return err
+		}
+		configHome = home + "/.config/"
 	}
-	return config.StoreConfig(conf, home+"/.config/"+configFileName)
+	// add missing trailing `/` when it's needed
+	if !strings.HasSuffix(configHome, "/") {
+		configHome += "/"
+	}
+	return config.StoreConfig(conf, configHome+configFileName)
 }
 
 func StoreProjectConfig(conf *config.Config) error {
