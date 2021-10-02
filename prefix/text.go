@@ -1,10 +1,10 @@
 package prefix
 
 func init() {
-	Packs = append(Packs, TextPrefix)
+	Packs = append(Packs, TextPack)
 }
 
-var TextPrefix = PrefixPack{
+var TextPack = PrefixPack{
 	Name:        "text",
 	Separator:   ": ",
 	Description: "Text prefixes",
