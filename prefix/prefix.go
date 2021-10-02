@@ -21,9 +21,7 @@ func (p *PrefixPack) GetPrefix(key string) string {
 	return ""
 }
 
-var Packs = []PrefixPack{
-	TextPrefix,
-}
+var Packs []PrefixPack
 
 func GetPrefixPack(name string) *PrefixPack {
 	for _, prefixPack := range Packs {

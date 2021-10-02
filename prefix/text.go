@@ -1,5 +1,9 @@
 package prefix
 
+func init() {
+	Packs = append(Packs, TextPrefix)
+}
+
 var TextPrefix = PrefixPack{
 	Name:        "text",
 	Separator:   ": ",
