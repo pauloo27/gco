@@ -3,7 +3,7 @@ package prefix
 import "strings"
 
 type Prefix struct {
-	Description, Name string
+	Key, Value, Description string
 }
 
 type PrefixPack struct {
@@ -12,10 +12,10 @@ type PrefixPack struct {
 	Prefixes          []*Prefix
 }
 
-func (p *PrefixPack) GetPrefix(name string) string {
+func (p *PrefixPack) GetPrefix(key string) string {
 	for _, prefix := range p.Prefixes {
-		if strings.EqualFold(prefix.Name, name) {
-			return prefix.Name + p.Separator
+		if strings.EqualFold(prefix.Key, key) {
+			return prefix.Value + p.Separator
 		}
 	}
 	return ""
