@@ -1,78 +1,78 @@
 package prefix
 
 func init() {
-	Packs = append(Packs, TextPack)
+	Packs = append(Packs, EmojiPack)
 }
 
-var TextPack = PrefixPack{
-	Name:        "text",
-	Separator:   ": ",
-	Description: "Text prefixes",
+var EmojiPack = PrefixPack{
+	Name:        "emoji",
+	Separator:   " ",
+	Description: "Emoji prefixes",
 	Prefixes: []*Prefix{
 		{
 			Description: "add feature",
 			Key:         "feat",
-			Value:       "feat",
+			Value:       "✨",
 		},
 		{
 			Description: "bug fix",
 			Key:         "fix",
-			Value:       "fix",
+			Value:       "🐛",
 		},
 		{
 			Description: "add/update ci",
 			Key:         "ci",
-			Value:       "ci",
+			Value:       "👷",
 		},
 		{
 			Description: "reformat code",
 			Key:         "format",
-			Value:       "format",
+			Value:       "📏",
 		},
 		{
 			Description: "add/update documentation",
 			Key:         "doc",
-			Value:       "doc",
+			Value:       "📖",
 		},
 		{
 			Description: "initial commit",
 			Key:         "init",
-			Value:       "init",
+			Value:       "🎉",
 		},
 		{
 			Description: "delete code",
 			Key:         "delete",
-			Value:       "delete",
+			Value:       "🔥",
 		},
 		{
 			Description: "move or rename code/files",
 			Key:         "move",
-			Value:       "move",
+			Value:       "🚚",
 		},
 		{
 			Description: "add/update test",
 			Key:         "test",
-			Value:       "test",
+			Value:       "✅",
 		},
 		{
 			Description: "add/remove/update dependency",
 			Key:         "dep",
-			Value:       "dep",
+			Value:       "🔩",
 		},
 		{
 			Description: "add tag/release",
 			Key:         "release",
-			Value:       "release",
+			Value:       "🔖",
 		},
 		{
 			Description: "fix typo",
 			Key:         "typo",
-			Value:       "typo",
+			Value:       "✏️",
 		},
 		{
 			Description: "merge branches/pull requests",
 			Key:         "merge",
-			Value:       "merge",
+			Value:       "🔀",
 		},
 		{
 			Description: "improve ui/ux/accessibility",
@@ -82,27 +82,27 @@ var TextPack = PrefixPack{
 		{
 			Description: "refactor",
 			Key:         "refact",
-			Value:       "refact",
+			Value:       "♻️",
 		},
 		{
 			Description: "internationalization",
 			Key:         "i18n",
-			Value:       "i18n",
+			Value:       "🌐",
 		},
 		{
 			Description: "add/update .gitignore",
 			Key:         "ignore",
-			Value:       "ignore",
+			Value:       "🙈",
 		},
 		{
 			Description: "add/remove development related stuff",
 			Key:         "dev",
-			Value:       "dev",
+			Value:       "💻",
 		},
 		{
 			Description: "work in progress",
 			Key:         "wip",
-			Value:       "wip",
+			Value:       "🚧",
 		},
 	},
 }
