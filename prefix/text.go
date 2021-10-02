@@ -80,11 +80,6 @@ var TextPrefix = PrefixPack{
 			Value:       "ux",
 		},
 		{
-			Description: "improve code",
-			Key:         "improve",
-			Value:       "improve",
-		},
-		{
 			Description: "refactor",
 			Key:         "refact",
 			Value:       "refact",
