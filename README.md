@@ -14,6 +14,12 @@ Write God-tier commits.
 If you have Go installed, you can simply do:
 `go install github.com/Pauloo27/gco@latest`
 
+
+## Prefix pack
+
+You can either use text prefix (`feat:`, `fix:`, `ci:`) or emojis 
+(`✨`, `🐛`, `👷`). You will be prompt to select one when you run `gco --init`.
+
 ## Hooks
 
 You can add Pre and Post commit hooks in `.gco.json`, like that:
