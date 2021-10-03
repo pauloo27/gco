@@ -45,9 +45,9 @@ var TextPack = PrefixPack{
 			Value:       "delete",
 		},
 		{
-			Description: "move or rename code/files",
-			Key:         "move",
-			Value:       "move",
+			Description: "rename/move code/files",
+			Key:         "rename",
+			Value:       "rename",
 		},
 		{
 			Description: "add/update test",
