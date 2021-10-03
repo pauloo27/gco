@@ -45,9 +45,14 @@ var EmojiPack = PrefixPack{
 			Value:       "🔥",
 		},
 		{
-			Description: "rename/move code/files",
-			Key:         "rename",
+			Description: "move code/files",
+			Key:         "move",
 			Value:       "🚚",
+		},
+		{
+			Description: "rename code/files",
+			Key:         "rename",
+			Value:       "📝",
 		},
 		{
 			Description: "add/update test",
