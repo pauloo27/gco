@@ -82,7 +82,7 @@ var EmojiPack = PrefixPack{
 		{
 			Description: "improve ui/ux/accessibility",
 			Key:         "ux",
-			Value:       "ux",
+			Value:       "🎨",
 		},
 		{
 			Description: "refactor",
