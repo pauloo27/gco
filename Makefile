@@ -1,7 +1,7 @@
 BINARY_NAME = gco
 
 build:
-	go build -v
+	go build -v -o gco ./cmd
 
 run: build
 	./$(BINARY_NAME) 

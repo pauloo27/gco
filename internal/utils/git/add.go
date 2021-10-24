@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Pauloo27/gco/utils"
+	"github.com/Pauloo27/gco/internal/utils"
 	"github.com/c-bata/go-prompt"
 )
 

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Pauloo27/gco/config"
-	"github.com/Pauloo27/gco/config/holder"
-	"github.com/Pauloo27/gco/prefix"
-	"github.com/Pauloo27/gco/utils"
-	"github.com/Pauloo27/gco/version"
+	"github.com/Pauloo27/gco/internal/config"
+	"github.com/Pauloo27/gco/internal/config/holder"
+	"github.com/Pauloo27/gco/internal/prefix"
+	"github.com/Pauloo27/gco/internal/utils"
+	"github.com/Pauloo27/gco/internal/version"
 	"github.com/c-bata/go-prompt"
 )
 

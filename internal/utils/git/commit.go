@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Pauloo27/gco/config"
-	"github.com/Pauloo27/gco/utils"
+	"github.com/Pauloo27/gco/internal/config"
+	"github.com/Pauloo27/gco/internal/utils"
 	"github.com/c-bata/go-prompt"
 )
 

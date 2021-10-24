@@ -4,8 +4,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Pauloo27/gco/config"
-	"github.com/Pauloo27/gco/utils/git"
+	"github.com/Pauloo27/gco/internal/config"
+	"github.com/Pauloo27/gco/internal/utils/git"
 )
 
 var globalConfig = &config.Config{}

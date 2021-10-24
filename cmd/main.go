@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/Pauloo27/gco/mode"
+	"github.com/Pauloo27/gco/internal/mode"
 )
 
 var isHelp, isInitGlobal, isInit, isRetry, isSkip bool

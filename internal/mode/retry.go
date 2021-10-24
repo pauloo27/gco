@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Pauloo27/gco/utils/git"
+	"github.com/Pauloo27/gco/internal/utils/git"
 )
 
 func Retry() {
