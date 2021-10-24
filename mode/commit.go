@@ -6,6 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	"github.com/Pauloo27/gco/config"
 	"github.com/Pauloo27/gco/config/holder"
 	"github.com/Pauloo27/gco/prefix"
 	"github.com/Pauloo27/gco/utils"
@@ -19,6 +20,19 @@ func commitCompleter(prefixPack *prefix.PrefixPack) prompt.Completer {
 		s = append(s, prompt.Suggest{
 			Text:        prefix.Value,
 			Description: prefix.Description,
+		})
+	}
+	return func(d prompt.Document) []prompt.Suggest {
+		return prompt.FilterFuzzy(s, d.GetWordBeforeCursor(), true)
+	}
+}
+
+func modulesCompleter(conf *config.Config) prompt.Completer {
+	s := []prompt.Suggest{}
+	for _, module := range conf.Modules {
+		s = append(s, prompt.Suggest{
+			Text:        module,
+			Description: module,
 		})
 	}
 	return func(d prompt.Document) []prompt.Suggest {
@@ -117,10 +131,26 @@ func Commit(skipHooks bool) {
 		fmt.Println("Commit cancelled")
 		os.Exit(-1)
 	}
+
 	prefix := pack.GetPrefix(rawPrefix)
-	if prefix == "" {
-		prefix = rawPrefix
+	if prefix != nil {
+		rawPrefix = prefix.Value
 	}
+
+	var module string
+	if len(conf.Modules) != 0 {
+		out.CursorUp(1)
+		out.EraseLine()
+		err = out.Flush()
+		if err != nil {
+			fmt.Println("Something went wrong while writing to output console")
+			os.Exit(-1)
+		}
+		modulePromptPrefix := pack.FormatPrefixForModulePrompt(rawPrefix)
+		module = utils.Prompt(promptPrefix+modulePromptPrefix, modulesCompleter(conf), prompt.OptionPrefixTextColor(prompt.Blue))
+	}
+
+	rawPrefix = pack.FormatPrefix(rawPrefix, module)
 
 	out.CursorUp(1)
 	out.EraseLine()
@@ -130,7 +160,7 @@ func Commit(skipHooks bool) {
 		os.Exit(-1)
 	}
 
-	title := utils.Prompt(promptPrefix+prefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
+	title := utils.Prompt(promptPrefix+rawPrefix, utils.EmptyCompleter, prompt.OptionPrefixTextColor(prompt.Blue))
 	if title == "" {
 		fmt.Println("Commit cancelled")
 		os.Exit(-1)
@@ -176,7 +206,7 @@ func Commit(skipHooks bool) {
 		}
 	}
 
-	commit := prefix + title + "\n\n" + message
+	commit := rawPrefix + title + "\n\n" + message
 	err = git.CommitToStdout(commit)
 	if err != nil {
 		err := os.WriteFile(".gcobkp", []byte(commit), 0600)

@@ -11,5 +11,6 @@ type Config struct {
 	AskFilesToCommit bool
 	PreCommit        []HookAction
 	PostCommit       []HookAction
+	Modules          []string
 	AskCISkip        bool
 }
