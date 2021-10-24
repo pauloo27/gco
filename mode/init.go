@@ -18,7 +18,7 @@ func initCompleter(d prompt.Document) []prompt.Suggest {
 		s = append(s, prompt.Suggest{
 			Text: prefixPack.Name,
 			Description: fmt.Sprintf("%s %s %s",
-				prefixPack.GetPrefix("feat"), prefixPack.GetPrefix("fix"), prefixPack.GetPrefix("ci"),
+				prefixPack.GetPrefix("feat").Value, prefixPack.GetPrefix("fix").Value, prefixPack.GetPrefix("ci").Value,
 			),
 		})
 	}
