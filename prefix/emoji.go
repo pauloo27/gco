@@ -26,7 +26,7 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "reformat code",
-			Key:         "format",
+			Key:         "fmt",
 			Value:       "📏",
 		},
 		{
@@ -41,17 +41,17 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "delete code",
-			Key:         "delete",
+			Key:         "del",
 			Value:       "🔥",
 		},
 		{
 			Description: "move code/files",
-			Key:         "move",
+			Key:         "mov",
 			Value:       "🚚",
 		},
 		{
-			Description: "rename code/files",
-			Key:         "rename",
+			Description: "ren code/files",
+			Key:         "ren",
 			Value:       "📝",
 		},
 		{
@@ -66,7 +66,7 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "add tag/release",
-			Key:         "release",
+			Key:         "tag",
 			Value:       "🔖",
 		},
 		{
@@ -76,7 +76,7 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "merge branches/pull requests",
-			Key:         "merge",
+			Key:         "merg",
 			Value:       "🔀",
 		},
 		{
@@ -86,7 +86,7 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "refactor",
-			Key:         "refact",
+			Key:         "ref",
 			Value:       "♻️",
 		},
 		{
@@ -96,7 +96,7 @@ var EmojiPack = PrefixPack{
 		},
 		{
 			Description: "add/update .gitignore",
-			Key:         "ignore",
+			Key:         "ig",
 			Value:       "🙈",
 		},
 		{

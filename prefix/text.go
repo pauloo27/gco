@@ -26,8 +26,8 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "reformat code",
-			Key:         "format",
-			Value:       "format",
+			Key:         "fmt",
+			Value:       "fmt",
 		},
 		{
 			Description: "add/update documentation",
@@ -41,18 +41,18 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "delete code",
-			Key:         "delete",
-			Value:       "delete",
+			Key:         "del",
+			Value:       "del",
 		},
 		{
 			Description: "move code/files",
-			Key:         "move",
-			Value:       "move",
+			Key:         "mov",
+			Value:       "mov",
 		},
 		{
 			Description: "rename code/files",
-			Key:         "rename",
-			Value:       "rename",
+			Key:         "ren",
+			Value:       "ren",
 		},
 		{
 			Description: "add/update test",
@@ -66,8 +66,8 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "add tag/release",
-			Key:         "release",
-			Value:       "release",
+			Key:         "tag",
+			Value:       "tag",
 		},
 		{
 			Description: "fix typo",
@@ -76,8 +76,8 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "merge branches/pull requests",
-			Key:         "merge",
-			Value:       "merge",
+			Key:         "merg",
+			Value:       "merg",
 		},
 		{
 			Description: "improve ui/ux/accessibility",
@@ -86,8 +86,8 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "refactor",
-			Key:         "refact",
-			Value:       "refact",
+			Key:         "ref",
+			Value:       "ref",
 		},
 		{
 			Description: "internationalization",
@@ -96,8 +96,8 @@ var TextPack = PrefixPack{
 		},
 		{
 			Description: "add/update .gitignore",
-			Key:         "ignore",
-			Value:       "ignore",
+			Key:         "ig",
+			Value:       "ig",
 		},
 		{
 			Description: "add/remove development related stuff",
