@@ -15,6 +15,16 @@ If you have Go installed, you can simply do:
 `go install github.com/Pauloo27/gco@latest`
 
 
+
+## Config
+
+You can create a config per repository, it should be placed at the root of
+the git repository with the name `.gco.json` (create it by running `gco -init`).
+
+You also can have a global config at `~/.config/gco.json` 
+(create it by running `gco -init-global`). The global config is used when 
+there's no config at the repository level.
+
 ## Prefix pack
 
 You can either use text prefix (`feat:`, `fix:`, `ci:`) or emojis 
