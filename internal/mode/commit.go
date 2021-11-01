@@ -98,13 +98,11 @@ func Commit(skipHooks bool) {
 	out := prompt.NewStderrWriter()
 
 	branch, err := git.GetCurrentBranchName()
-	if err != nil {
-		fmt.Println("Cannot get current branch name")
-		os.Exit(-1)
+	if err == nil {
+		utils.PrettyPrint(out,
+			"You are committing to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
+		)
 	}
-	utils.PrettyPrint(out,
-		"You are committing to ", prompt.Blue, branch, prompt.DefaultColor, "\n",
-	)
 
 	files, filesName := listChangedFiles(out)
 
