@@ -50,7 +50,7 @@ var EmojiPack = PrefixPack{
 			Value:       "🚚",
 		},
 		{
-			Description: "ren code/files",
+			Description: "rename code/files",
 			Key:         "ren",
 			Value:       "📝",
 		},
