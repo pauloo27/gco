@@ -1,7 +1,7 @@
 BINARY_NAME = gco
 
 build:
-	go build -v -o gco
+	go build -v -o gco ./cmd/gco
 
 run: build
 	./$(BINARY_NAME) 
@@ -32,7 +32,7 @@ inspect: lint spell gosec staticcheck
 
 # (build but with a smaller binary)
 dist:
-	go build -ldflags="-w -s" -gcflags=all=-l -v
+	go build -ldflags="-w -s" -gcflags=all=-l -v ./cmd/gco
 
 # (even smaller binary)
 pack: dist
