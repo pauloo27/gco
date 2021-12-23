@@ -4,7 +4,7 @@ Write God-tier commits.
 
 [Agola CI](https://ci.notagovernment.agency/user/Pauloo27/projects/GCO.proj)
 
-[![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/a04bdf61-b3f3-422a-bb81-10c5408abf20?branch=master)](https://ci.notagovernment.agency/user/Pauloo27/projects/GCO.proj)
+[![CI status](https://ci.notagovernment.agency/api/v1alpha/badges/98ea6c87-846f-40af-8e0c-ed63a1a07597?branch=master)](https://ci.notagovernment.agency/user/Pauloo27/projects/gco.proj)
 
 
 <img src="https://github.com/Pauloo27/gco/raw/master/.assets/commit.gif" alt="Usage example gif" height="250x" />
