@@ -20,14 +20,29 @@ var TextPack = PrefixPack{
 			Value:       "fix",
 		},
 		{
+			Description: "repair a small thing",
+			Key:         "rep",
+			Value:       "rep",
+		},
+		{
+			Description: "merge something",
+			Key:         "merge",
+			Value:       "merge",
+		},
+		{
+			Description: "revert a commit",
+			Key:         "rev",
+			Value:       "rev",
+		},
+		{
 			Description: "add/update ci",
 			Key:         "ci",
 			Value:       "ci",
 		},
 		{
-			Description: "reformat code",
-			Key:         "fmt",
-			Value:       "fmt",
+			Description: "style/reformat code",
+			Key:         "style",
+			Value:       "style",
 		},
 		{
 			Description: "add/update documentation",
@@ -40,49 +55,14 @@ var TextPack = PrefixPack{
 			Value:       "init",
 		},
 		{
-			Description: "delete code",
-			Key:         "del",
-			Value:       "del",
-		},
-		{
-			Description: "move code/files",
-			Key:         "mov",
-			Value:       "mov",
-		},
-		{
-			Description: "rename code/files",
-			Key:         "ren",
-			Value:       "ren",
-		},
-		{
 			Description: "add/update test",
 			Key:         "test",
 			Value:       "test",
 		},
 		{
-			Description: "add/remove/update dependency",
-			Key:         "dep",
-			Value:       "dep",
-		},
-		{
-			Description: "add tag/release",
-			Key:         "tag",
-			Value:       "tag",
-		},
-		{
-			Description: "fix typo",
-			Key:         "typo",
-			Value:       "typo",
-		},
-		{
-			Description: "merge branches/pull requests",
-			Key:         "merg",
-			Value:       "merg",
-		},
-		{
-			Description: "improve ui/ux/accessibility",
-			Key:         "ux",
-			Value:       "ux",
+			Description: "improve performance",
+			Key:         "perf",
+			Value:       "perf",
 		},
 		{
 			Description: "refactor",
@@ -90,24 +70,9 @@ var TextPack = PrefixPack{
 			Value:       "ref",
 		},
 		{
-			Description: "internationalization",
-			Key:         "i18n",
-			Value:       "i18n",
-		},
-		{
-			Description: "add/update .gitignore",
-			Key:         "ig",
-			Value:       "ig",
-		},
-		{
 			Description: "add/remove development related stuff",
 			Key:         "dev",
 			Value:       "dev",
-		},
-		{
-			Description: "work in progress",
-			Key:         "wip",
-			Value:       "wip",
 		},
 	},
 }
