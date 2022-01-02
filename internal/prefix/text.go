@@ -70,6 +70,11 @@ var TextPack = PrefixPack{
 			Value:       "ref",
 		},
 		{
+			Description: "add/remove/update dependency",
+			Key:         "dep",
+			Value:       "dep",
+		},
+		{
 			Description: "add/remove development related stuff",
 			Key:         "dev",
 			Value:       "dev",
