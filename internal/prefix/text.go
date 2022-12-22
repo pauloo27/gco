@@ -20,11 +20,6 @@ var TextPack = PrefixPack{
 			Value:       "fix",
 		},
 		{
-			Description: "repair a small thing",
-			Key:         "rep",
-			Value:       "rep",
-		},
-		{
 			Description: "merge something",
 			Key:         "merge",
 			Value:       "merge",
@@ -58,11 +53,6 @@ var TextPack = PrefixPack{
 			Description: "add/update test",
 			Key:         "test",
 			Value:       "test",
-		},
-		{
-			Description: "improve performance",
-			Key:         "perf",
-			Value:       "perf",
 		},
 		{
 			Description: "refactor",
